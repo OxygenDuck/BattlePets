@@ -29,7 +29,7 @@ public class Move : ScriptableObject
     //Normal Attack
     public static void Attack()
     {
-        //TODO: get user and selected target
+        //was TODO: get user and selected target
         BattleActor User = null;
         BattleActor Target = null;
 
@@ -63,7 +63,7 @@ public class Move : ScriptableObject
     //Berserk move
     public static void Berserk(BattleActor User, BattleActor Target)
     {
-        //TODO: Damage both opponents?
+        //was TODO: Damage both opponents?
         //Calculate Damage
         float damage = 1f;
         float damageCalc = User.Actor.Attack - Target.Actor.Defense;

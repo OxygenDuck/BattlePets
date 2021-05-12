@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Bear
   m_EditorClassIdentifier: 
   Name: Bear
-  Hp: 40
-  MaxHp: 40
-  Attack: 35
-  Defense: 20
+  Hp: 8
+  MaxHp: 8
+  Attack: 8
+  Defense: 4
   Speed: 5
   Sprite: {fileID: 21300000, guid: 185ff0a33a5bcb3409680bfa1097c5fa, type: 3}
   State: 1
   AttackMove: 0
-  SpecialMove: 1
+  SpecialMove: 2

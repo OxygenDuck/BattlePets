@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Fish
   m_EditorClassIdentifier: 
   Name: Fish
-  Hp: 75
-  MaxHp: 75
-  Attack: 20
-  Defense: 10
+  Hp: 15
+  MaxHp: 15
+  Attack: 4
+  Defense: 3
   Speed: 20
   Sprite: {fileID: 21300000, guid: 6d3fd135c717cc54c87d808165aced05, type: 3}
   State: 1

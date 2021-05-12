@@ -36,6 +36,7 @@ public class DialogueController : MonoBehaviour
         Debug.Log(Option2Text.text);
     }
 
+    //Select the first option
     public void SelectOption1()
     {
         SelectedOption = 1;
@@ -43,6 +44,8 @@ public class DialogueController : MonoBehaviour
         Button2.image.color = Color.white;
         ButtonConfirm.interactable = true;
     }
+
+    //Select the second option
     public void SelectOption2()
     {
         SelectedOption = 2;
@@ -51,6 +54,7 @@ public class DialogueController : MonoBehaviour
         ButtonConfirm.interactable = true;
     }
 
+    //Confirm the selection
     public void ConfirmSelection()
     {
         switch (BattleController.BattleState)
@@ -75,17 +79,48 @@ public class DialogueController : MonoBehaviour
     public void SetText(string Text)
     {
         DialogueText.text = Text;
-        //TODO: Animate
     }
 
+    //Variant that types the letters and hides buttons
+    public void TypeText(string Text)
+    {
+        //Hide the buttons
+        ShowButtons(false);
+
+        //Start Typing
+        TypeTextCharacters(Text);
+    }
+
+    //TODO: Animate characters coming on screen | Might leave this out
+    private void TypeTextCharacters(string Text)
+    {
+        DialogueText.text = "";
+        foreach (char letter in Text.ToCharArray())
+        {
+            DialogueText.text += letter;
+        }
+    }
+
+    //Set the text for option 1
     public void SetOption1Text(string Text)
     {
+        ShowButtons(true);
         Option1Text.text = Text;
     }
 
+    //Set the text for option 2
     public void SetOption2Text(string Text)
     {
+        ShowButtons(true);
         Option2Text.text = Text;
+    }
+
+    //Show or hide the buttons
+    public void ShowButtons(bool show)
+    {
+        Button1.gameObject.SetActive(show);
+        Button2.gameObject.SetActive(show);
+        ButtonConfirm.gameObject.SetActive(show);
     }
 }
 

@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CreationManager : MonoBehaviour
 {
     //Variables
     public Elements element1 = Elements.NULL, element2 = Elements.NULL;
+    public TutorialCanvas Tutorial;
     public List<OriginActor> OriginPets;
     private short CurrentSelector = 1; //1 = element1, -1 = element2
     private GameObject Selector1, Selector2, CreationPreview, CreateButton, ContinueButton;
     private bool SlotsFilled = false;
+    public Text StatPreview;
 
     //Start function
     private void Start()
@@ -21,6 +25,34 @@ public class CreationManager : MonoBehaviour
         CreateButton = GameObject.Find("BtnCreate");
         ContinueButton = GameObject.Find("BtnContinue");
 
+        //Set the first tutorial
+        if (PetManager.ShowTutorials)
+        {
+            Tutorial.gameObject.SetActive(true);
+            switch (PetManager.Level)
+            {
+                case 0:
+                    Tutorial.SetText("An army of bugs has risen and is threatening to conquer the world! There has to be something we can do against it!" +
+                "\nLuckily we have a secret weapon, we can create different pets to fight off the insects! It is up to you to guide these pets into battle." +
+                "\n\nSelect any combination of two elements to create a pet. There are 6 total different combinations." +
+                "\n\nGood Luck!");
+                    break;
+                case 1:
+                    Tutorial.SetText("We have some spare time now that the first wave has been fought." +
+                        "\nYour pets have been fully healed, and if you lost any in the previous battle you can create new ones." +
+                        "\nPress the \"Continue\" button when you're ready");
+                    break;
+                default:
+                    Tutorial.Continue();
+                    break;
+            }
+        }
+        else
+        {
+            Tutorial.Continue();
+        }
+
+        SetSlots();
         ClearPreview();
     }
 
@@ -35,6 +67,7 @@ public class CreationManager : MonoBehaviour
         CreationPreview.GetComponent<SpriteRenderer>().sprite = null;
         CreateButton.SetActive(false);
         ContinueButton.SetActive(SlotsFilled);
+        StatPreview.text = "";
     }
 
     //Get the element from a button and acto accordingly
@@ -147,6 +180,12 @@ public class CreationManager : MonoBehaviour
         CreationPreview.GetComponent<SpriteRenderer>().sprite = origin.Sprite;
         CreateButton.SetActive(true);
         CreateButton.GetComponent<CreateButton>().OriginToCreate = origin;
+        StatPreview.text = "" +
+            origin.Name +
+            "\nATTACK: " + origin.Attack.ToString() +
+            "\nDEFENSE: " + origin.Defense.ToString() +
+            "\nSPEED: " + origin.Speed.ToString() +
+            "\nSPECIAL MOVE: " + origin.SpecialMove.ToString();
     }
 
     //Set the pet slots
@@ -160,6 +199,16 @@ public class CreationManager : MonoBehaviour
             {
                 SlotsFilled = true;
             }
+        }
+
+        //Set a tutorial
+        if (PetManager.Pets.Count == 1 && PetManager.ShowTutorials && PetManager.Level == 0)
+        {
+            Tutorial.gameObject.SetActive(true);
+            Tutorial.SetText("" +
+                "You have succesfully created a pet! You can see which pets you have created on the right side of the screen." +
+                "\n\nYou need to create 4 more before we can head into battle! Try to get a good variety to help you against different enemies." +
+                "\nOnce you are done press the \"Continue\" button that will shwo up on the bottom right of the screen.");
         }
     }
 }

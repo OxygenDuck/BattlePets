@@ -6,7 +6,11 @@ public static class PetManager
 {
     public static List<Actor> Pets = new List<Actor>();
     public static List<Actor> Enemies = new List<Actor>();
+    public static List<Actor> Bosses = new List<Actor>();
     public static int Level = 0; //0 = level 1, 1 = level 2, 2 = level 3
+    public static GameState GameState = GameState.PLAYING;
+    public static bool ShowTutorials = true;
+    public static bool FirstPetFallen = false;
 
     //Add Pet to the global pets list
     public static void AddPet(OriginActor Origin)
@@ -15,12 +19,23 @@ public static class PetManager
         Pets.Add(newPet);
     }
 
-    public static void SetEnemies(List<OriginActor> OriginActors)
+    //Set the enemies for a level
+    public static void SetEnemies(List<OriginActor> OriginEnemies, List<OriginActor> OriginBosses)
     {
+        //Clear the old enemies
         Enemies.Clear();
-        foreach (OriginActor Origin in OriginActors)
+        Bosses.Clear();
+
+        //Set the regular enemies
+        foreach (OriginActor Origin in OriginEnemies)
         {
             Enemies.Add(new Actor(Origin));
+        }
+
+        //Set the bosses
+        foreach (OriginActor Origin in OriginBosses)
+        {
+            Bosses.Add(new Actor(Origin));
         }
     }
 }
@@ -29,7 +44,7 @@ public static class PetManager
 public class Actor
 {
     //Constructor
-    public Actor (OriginActor Origin)
+    public Actor(OriginActor Origin)
     {
         //Copy from origin
         Name = Origin.Name;
@@ -56,10 +71,21 @@ public class Actor
     public void KeepHealthInBounds()
     {
         if (Hp > MaxHp) Hp = MaxHp;
-        else if (Hp < 0) Hp = 0;
+        else if (Hp < 0)
+        {
+            Hp = 0;
+            Faint();
+        }
 
         Hp = Mathf.RoundToInt(Hp);
+    }
+
+    //What to do when Hp reaches 0
+    public void Faint()
+    {
+        State = ActorState.DEFEATED;
     }
 }
 
 public enum ActorState { ACTIVE, INACTIVE, DEFEATED }
+public enum GameState { PLAYING, WON, LOST }

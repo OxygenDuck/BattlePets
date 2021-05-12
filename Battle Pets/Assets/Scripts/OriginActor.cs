@@ -7,8 +7,8 @@ public class OriginActor : ScriptableObject
 {
     //Set Variables
     public string Name = "Name";
-    public float Hp = 50, MaxHp = 50;
-    public float Attack = 25, Defense = 15, Speed = 10;
+    public float Hp = 10, MaxHp = 10;
+    public float Attack = 5, Defense = 3, Speed = 10;
     public Sprite Sprite;
     public ActorState State = ActorState.INACTIVE;
     public MoveEnum AttackMove;

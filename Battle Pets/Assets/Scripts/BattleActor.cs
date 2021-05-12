@@ -27,17 +27,33 @@ public class BattleActor : MonoBehaviour
             Actor.Hp = Actor.MaxHp;
         }
         UpdateUI();
-        Actor.State = ActorState.ACTIVE;
+        if (Actor.State != ActorState.DEFEATED)
+        {
+            Actor.State = ActorState.ACTIVE;
+        }
     }
 
+    //Display the current status of this actor on the UI
     public void UpdateUI()
     {
-        NameText.text = Actor.Name;
-        HealthBar.fillAmount = (Actor.MaxHp - (Actor.MaxHp - Actor.Hp)) / Actor.MaxHp;
-        SlotSprite.sprite = Actor.Sprite;
+        switch (Actor.State)
+        {
+            case ActorState.DEFEATED: //Display a defeated enemy
+                NameText.text = "";
+                HealthBar.fillAmount = 0;
+                HealthBar.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Defeated";
+                SlotSprite.sprite = null;
+                break;
+            default: //Show normal information
+                NameText.text = Actor.Name;
+                HealthBar.fillAmount = (Actor.MaxHp - (Actor.MaxHp - Actor.Hp)) / Actor.MaxHp;
+                HealthBar.gameObject.transform.GetChild(0).GetComponent<Text>().text = Actor.Hp.ToString() + " / " + Actor.MaxHp.ToString();
+                SlotSprite.sprite = Actor.Sprite;
+                break;
+        }
     }
 
-    //TODO: Battle event handlers
+    //Battle event handlers
 
     #region Moves
     //Moves
@@ -52,32 +68,51 @@ public class BattleActor : MonoBehaviour
         //Apply Damage
         Target.Actor.Hp -= damage;
         Target.Actor.KeepHealthInBounds();
+
+        //Check if taget is defeated and act accordingly
+        if (Target.Actor.Hp <= 0)
+        {
+            Target.Actor.Faint();
+        }
+        Target.UpdateUI();
     }
 
     //Heal move
     public void Heal(BattleActor Target)
     {
-        Target.Actor.Hp += (Target.Actor.MaxHp / 2);
+        Target.Actor.Hp += (Target.Actor.MaxHp / 4);
         Target.Actor.KeepHealthInBounds();
+        Target.UpdateUI();
     }
 
-    //TODO: Berserk move
-    public void Berserk(BattleActor Target)
+    //Berserk move
+    public void Berserk(BattleActor[] Targets)
     {
-        //TODO: Damage both opponents?
-        //Calculate Damage
-        float damage = 1f;
-        float damageCalc = Actor.Attack - Target.Actor.Defense;
-        damageCalc = Mathf.RoundToInt(Random.Range(damageCalc * 0.85f, damageCalc));
-        if (damageCalc > damage) damage = damageCalc;
+        //Damage both opponents
+        foreach (BattleActor Target in Targets)
+        {
+            //Calculate Damage
+            float damage = 1f;
+            float damageCalc = Actor.Attack - Target.Actor.Defense;
+            damageCalc = Mathf.RoundToInt(Random.Range(damageCalc * 0.85f, damageCalc));
+            if (damageCalc > damage) damage = damageCalc;
 
-        //Apply Damage
-        Target.Actor.Hp -= damage;
-        Target.Actor.KeepHealthInBounds();
+            //Apply Damage
+            Target.Actor.Hp -= damage;
+            Target.Actor.KeepHealthInBounds();
+
+            //Check if taget is defeated and act accordingly
+            if (Target.Actor.Hp <= 0)
+            {
+                Target.Actor.Faint();
+            }
+            Target.UpdateUI();
+        }
 
         //Apply Self Damage
         Actor.Hp -= Actor.MaxHp / 5;
         Actor.KeepHealthInBounds();
+        UpdateUI();
     }
     #endregion
 }

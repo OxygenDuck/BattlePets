@@ -16,7 +16,7 @@ public class CreateButton : MonoBehaviour
         cm.ClearPreview();
     }
 
-    //TODO: Continue to next scene
+    //Continue to next scene
     public void Continue()
     {
         SceneManager.LoadScene("BattleScene");

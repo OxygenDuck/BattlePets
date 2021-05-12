@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Cat
   m_EditorClassIdentifier: 
   Name: Cat
-  Hp: 50
-  MaxHp: 50
-  Attack: 25
-  Defense: 15
+  Hp: 10
+  MaxHp: 10
+  Attack: 5
+  Defense: 2
   Speed: 10
   Sprite: {fileID: 21300000, guid: a813ec3cc707b6c4f9fb57ca469c7da4, type: 3}
   State: 1

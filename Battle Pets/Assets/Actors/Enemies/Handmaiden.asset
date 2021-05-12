@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51319adddbe81d4bacef3c60c30e2c8, type: 3}
+  m_Name: Handmaiden
+  m_EditorClassIdentifier: 
+  Name: Cruel Handmaid
+  Hp: 10
+  MaxHp: 10
+  Attack: 5
+  Defense: 2
+  Speed: 20
+  Sprite: {fileID: 21300000, guid: af9420f5f78bdb046a19015298409901, type: 3}
+  State: 1
+  AttackMove: 0
+  SpecialMove: 0

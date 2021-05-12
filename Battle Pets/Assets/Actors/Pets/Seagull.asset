@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Seagull
   m_EditorClassIdentifier: 
   Name: Seagull
-  Hp: 35
-  MaxHp: 35
-  Attack: 15
-  Defense: 15
+  Hp: 9
+  MaxHp: 9
+  Attack: 4
+  Defense: 4
   Speed: 30
   Sprite: {fileID: 21300000, guid: e263e09e2b8bd4545a76af44def35ff3, type: 3}
   State: 1

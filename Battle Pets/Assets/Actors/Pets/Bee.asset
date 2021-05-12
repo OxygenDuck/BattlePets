@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Bee
   m_EditorClassIdentifier: 
   Name: Bee
-  Hp: 75
-  MaxHp: 75
-  Attack: 20
-  Defense: 40
+  Hp: 15
+  MaxHp: 15
+  Attack: 4
+  Defense: 5
   Speed: 20
-  Sprite: {fileID: 21300000, guid: 067d6d61e0bfaa24caf55b91c3fb0681, type: 3}
+  Sprite: {fileID: 21300000, guid: ee702b5686d1e644d8a3095d70185c18, type: 3}
   State: 1
   AttackMove: 0
   SpecialMove: 1

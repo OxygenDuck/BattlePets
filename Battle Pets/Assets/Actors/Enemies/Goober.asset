@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51319adddbe81d4bacef3c60c30e2c8, type: 3}
   m_Name: Goober
   m_EditorClassIdentifier: 
-  Name: Goober
-  Hp: 50
-  MaxHp: 50
-  Attack: 25
-  Defense: 15
-  Speed: 10
+  Name: Bait
+  Hp: 2
+  MaxHp: 2
+  Attack: 3
+  Defense: 3
+  Speed: 1
   Sprite: {fileID: 21300000, guid: 9b43c72feb99bcc40bc3b7e6c7a6b2af, type: 3}
   State: 1
   AttackMove: 0
